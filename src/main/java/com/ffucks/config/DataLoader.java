@@ -15,9 +15,9 @@ public class DataLoader {
     @Bean
     CommandLineRunner loadData(OrderRepository orderRepository) {
         return args -> {
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 10; i++) {
                 Order order = new Order();
-                order.setOrderNumber("ORD-" + (1000 + i));
+                order.setOrderNumber("Order-" + (1000 + i));
                 order.setStatus("NEW");
                 order.setTotalAmount(BigDecimal.valueOf(100 + i));
 
@@ -32,7 +32,7 @@ public class DataLoader {
                 orderRepository.save(order);
             }
 
-            System.out.println("DataLoader: populated 50 orders x 5 items");
+            System.out.println("DataLoader: populated 3 orders x 10 items");
         };
     }
 }

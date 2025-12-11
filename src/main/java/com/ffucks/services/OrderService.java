@@ -2,8 +2,6 @@ package com.ffucks.services;
 
 import com.ffucks.entities.Order;
 import com.ffucks.repositories.OrderRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +24,12 @@ public class OrderService {
     @Transactional
     public List<Order> getOrderRepositoryFetch() {
         return orderRepository.findUsingFetch();
+    }
+
+    @Transactional()
+    public List<Order> getOrderRepositoryBatch() {
+        List<Order> orders = orderRepository.findAll();
+        orders.forEach(o -> o.getItems().size());
+        return orders;
     }
 }

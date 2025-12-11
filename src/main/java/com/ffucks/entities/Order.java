@@ -1,6 +1,7 @@
 package com.ffucks.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
+@org.hibernate.annotations.BatchSize(size = 3)
 public class Order {
 
     @Id
@@ -20,8 +22,8 @@ public class Order {
 
     private BigDecimal totalAmount;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @BatchSize(size = 3)
     private List<Item> items = new ArrayList<>();
 
     public Long getId() {

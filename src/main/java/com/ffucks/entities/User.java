@@ -2,10 +2,11 @@ package com.ffucks.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -14,10 +15,9 @@ public class User {
 
     private String name;
 
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
-
-    private String email;
+    // Pattern: Anotate the collection with OneToMany and point mappedBy to 'owner' in device
+    /*@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Device> devices = new ArrayList<>();*/
 
     public Long getId() {
         return id;
@@ -35,19 +35,21 @@ public class User {
         this.name = name;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    /*public List<Device> getDevices() {
+        return devices;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 
-    public String getEmail() {
-        return email;
+    public void addDevice(Device device) {
+        devices.add(device);
+        device.setOwner(this);
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void removeDevice(Device device) {
+        devices.remove(device);
+        device.setOwner(null);
+    }*/
 }

@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.BatchSize;
 
 @Entity
-@BatchSize(size = 20)
 @Table(name = "items")
+@BatchSize(size = 3)
 public class Item {
 
     @Id

@@ -66,5 +66,19 @@ public class OrderController {
         return orders;
     }
 
+    @GetMapping("/batch")
+    public List<Order> batchDemo() {
+        clearHibernateStats();
+
+        List<Order> orders = orderService.getOrderRepositoryBatch();
+
+        orders.forEach(o ->
+                System.out.println("Order Batch Item size: " + o.getItems().size()));
+
+        printHibernateStats("After Batch");
+
+        return orders;
+    }
+
 
 }
