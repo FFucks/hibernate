@@ -13,15 +13,12 @@ public class Store {
 
     private String name;
 
-    //Good pattern use LAZY when multiple child lists
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "store")
-    private List<Employee> employees;
+    private String address;
 
-    //Good pattern use LAZY when multiple child lists
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "store")
-    private List<Client> clients;
+    private String phoneNumber;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "store")
+    private List<Employee> employees;
 
     public Long getId() {
         return id;
@@ -47,11 +44,20 @@ public class Store {
         this.employees = employees;
     }
 
-    public List<Client> getClients() {
-        return clients;
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

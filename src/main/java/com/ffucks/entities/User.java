@@ -15,10 +15,6 @@ public class User {
 
     private String name;
 
-    // Pattern: Anotate the collection with OneToMany and point mappedBy to 'owner' in device
-    /*@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Device> devices = new ArrayList<>();*/
-
     public Long getId() {
         return id;
     }
@@ -34,22 +30,4 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
-    /*public List<Device> getDevices() {
-        return devices;
-    }
-
-    public void setDevices(List<Device> devices) {
-        this.devices = devices;
-    }
-
-    public void addDevice(Device device) {
-        devices.add(device);
-        device.setOwner(this);
-    }
-
-    public void removeDevice(Device device) {
-        devices.remove(device);
-        device.setOwner(null);
-    }*/
 }

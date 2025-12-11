@@ -24,9 +24,12 @@ public class UserService {
         User user = new User();
         user.setName(name);
 
+        // Persist user directly
+        User savedUser = userRepository.save(user);
+
         Device device = new Device();
         device.setSerial(serial);
-        device.setOwner(user);
+        device.setOwner(savedUser);
 
         deviceRepository.save(device);
         UserResponse response = new UserResponse();

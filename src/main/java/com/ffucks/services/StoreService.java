@@ -30,4 +30,9 @@ public class StoreService {
     public Store save(Store store) {
         return storeRepository.save(store);
     }
+
+    @Transactional
+    public Optional<Store> getStoreWithEmployees(Long id) {
+        return storeRepository.findStoreWithEmployees(id);
+    }
 }

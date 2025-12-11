@@ -12,9 +12,8 @@ public class Employee {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "store_id")
-    @JsonIgnore
     private Store store;
 
     public Long getId() {

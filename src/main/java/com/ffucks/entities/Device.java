@@ -12,7 +12,7 @@ public class Device {
     private String serial;
 
     //ManyToOne should not controll the lifecicle of this father entity, so CascadeType.ALL is not recommended in this case.
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User owner;
 

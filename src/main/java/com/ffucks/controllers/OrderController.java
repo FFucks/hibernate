@@ -67,7 +67,7 @@ public class OrderController {
     }
 
     @GetMapping("/batch")
-    public List<Order> batchDemo() {
+    public List<Order> getOrderBatch() {
         clearHibernateStats();
 
         List<Order> orders = orderService.getOrderRepositoryBatch();

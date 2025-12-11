@@ -1,7 +1,6 @@
 package com.ffucks.config;
 
 import com.ffucks.entities.*;
-import com.ffucks.repositories.ClientRepository;
 import com.ffucks.repositories.EmployeeRepository;
 import com.ffucks.repositories.OrderRepository;
 import com.ffucks.repositories.StoreRepository;
@@ -14,7 +13,7 @@ import java.math.BigDecimal;
 @Configuration
 public class DataLoader {
 
-    /*@Bean
+    @Bean
     CommandLineRunner loadData(OrderRepository orderRepository) {
         return args -> {
             for (int i = 0; i < 10; i++) {
@@ -34,12 +33,12 @@ public class DataLoader {
                 orderRepository.save(order);
             }
 
-            System.out.println("DataLoader: populated 3 orders x 10 items");
+            System.out.println("DataLoader: populated 10 orders x 5 items");
         };
-    }*/
+    }
 
-    @Bean
-    CommandLineRunner loadData(StoreRepository storeRepository, EmployeeRepository employeeRepository, ClientRepository clientRepository) {
+    /*@Bean
+    CommandLineRunner loadData(StoreRepository storeRepository, EmployeeRepository employeeRepository) {
         return args -> {
 
             if (storeRepository.count() > 0) {
@@ -49,6 +48,8 @@ public class DataLoader {
 
             Store store = new Store();
             store.setName("Supermarket Central");
+            store.setAddress("123 Main St, Anytown");
+            store.setPhoneNumber("555-1234");
             store = storeRepository.save(store);
 
             for (int i = 1; i <= 20; i++) {
@@ -58,14 +59,7 @@ public class DataLoader {
                 employeeRepository.save(e);
             }
 
-            for (int i = 1; i <= 30; i++) {
-                Client c = new Client();
-                c.setName("Client " + i);
-                c.setStore(store);
-                clientRepository.save(c);
-            }
-
-            System.out.println("DataLoader: populated Store with 20 employees and 30 clients, Store id: " + store.getId());
+            System.out.println("DataLoader: populated Store with 20 employees, Store id: " + store.getId());
         };
-    }
+    }*/
 }

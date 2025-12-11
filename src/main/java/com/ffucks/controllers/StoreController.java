@@ -31,4 +31,11 @@ public class StoreController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/{id}/withemployees")
+    public ResponseEntity<Store> getStoreWithEmployees(@PathVariable Long id) {
+        return storeService.getStoreWithEmployees(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
