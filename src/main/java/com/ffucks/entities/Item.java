@@ -1,13 +1,11 @@
 package com.ffucks.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.BatchSize;
 
 @Entity
 @BatchSize(size = 20)
+@Table(name = "items")
 public class Item {
 
     @Id
@@ -19,6 +17,10 @@ public class Item {
     private Float price;
 
     private Integer quantity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     public Long getId() {
         return id;
@@ -50,5 +52,13 @@ public class Item {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

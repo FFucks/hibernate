@@ -2,27 +2,18 @@ package com.ffucks.repositories;
 
 import com.ffucks.entities.Order;
 import jakarta.persistence.EntityManager;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class OrderRepository {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    public List<Order> OrderRepositoryN1(EntityManager em) {
-        List<Order> orders = em.createQuery("SELECT o from Order o", Order.class).getResultList();
-        for (Order o : orders) {
-            System.out.println(o.getItems().size());
-        }
+    // findAll() pattern of JpaRepository that causes N+1 problem
 
-        return orders;
-    }
-
-    public List<Order> OrderRepositoryJoinFetch(EntityManager em) {
-        List<Order> orders = em.createQuery("select o from Order o join fetch o.items", Order.class).getResultList();
-        return orders;
-    }
-
-
+    @Query("SELECT DISTINCT o FROM Order o JOIN FETCH o.items")
+    List<Order> findUsingFetch();
 
 }

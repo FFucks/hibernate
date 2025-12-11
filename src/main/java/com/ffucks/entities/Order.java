@@ -1,13 +1,13 @@
 package com.ffucks.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -18,10 +18,11 @@ public class Order {
 
     private String status;
 
-    private String totalAmount;
+    private BigDecimal totalAmount;
 
-    @org.hibernate.annotations.BatchSize(size = 10)
-    private List<Item> items;
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Item> items = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -47,19 +48,34 @@ public class Order {
         this.status = status;
     }
 
-    public String getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
     public List<Item> getItems() {
         return items;
     }
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public void addItem(Item item) {
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        this.items.add(item);
+        item.setOrder(this);
+    }
+
+    public void removeItem(Item item) {
+        if (this.items != null) {
+            this.items.remove(item);
+            item.setOrder(null);
+        }
     }
 }
